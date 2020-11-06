@@ -1,0 +1,31 @@
+.card {
+  margin: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  width: 400px;
+  justify-content: space-evenly;
+  display: flex;
+  flex-wrap: wrap;
+  > * {
+    margin: 10px;
+  }
+  .card-header {
+    display: flex;
+    flex-direction: column;
+  }
+  .btn {
+    flex-basis: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 1px 2px 4px #777;
+
+    &:hover {
+      box-shadow: 2px 3px 8px #333;
+    }
+  }
+  .btn-dark {
+    color: #fff;
+    background-color: #333333;
+    border-radius: 4px;
+  }
+}

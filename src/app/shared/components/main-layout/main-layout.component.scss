@@ -1,0 +1,41 @@
+.container {
+  background-color: aquamarine;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  input, button {
+    width: 150px;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px;
+    outline: none;
+    border: none;
+  }
+  button {
+    background-color: blueviolet;
+    color: aliceblue;
+  }
+}
+footer {
+  display: flex;
+  background-color: #333;
+  color: aliceblue;
+  .logo {
+    padding: 20px;
+  }
+  ul {
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  li  {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+  }
+  a {
+    color: #ddd;
+  }
+}
