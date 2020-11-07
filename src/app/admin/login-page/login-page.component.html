@@ -1,2 +1,18 @@
-<p>login-page works!</p>
+<form class="admin-login__form" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Enter to admin panel</h2>
+  <mat-form-field appearance="outline">
+    <mat-label>email</mat-label>
+    <input matInput id="email" type="email" [errorStateMatcher]="matcher" formControlName="email">
+    <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="form.hasError('email') && !form.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>password</mat-label>
+    <input matInput id="password" type="password" formControlName="password">
+  </mat-form-field>
+  <button mat-raised-button color="warn" [disabled]="form.invalid" >submit</button>
+</form>
+
 

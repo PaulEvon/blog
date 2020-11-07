@@ -1,0 +1,41 @@
+.admin-top-bar  {
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__nav {
+    ul {
+      display: flex;
+      li {
+        display: flex;
+        align-items: center;
+        a {
+          padding: 15px;
+          color: white;
+        }
+        &::marker {
+          content: none;
+        }
+      }
+      li:first-child {
+        button {
+          cursor: pointer;
+          margin: 0 20px 0 15px;
+          color: #333;
+          height: 30px;
+          padding: 5px 10px;
+          border-radius: 4px;
+          font-weight: 700;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  div {
+    a {
+      color: white;
+      padding: 10px;
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.post {
+  margin: 20px 40px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    button {
+      margin-right: 10px;
+      padding: 0 10px;
+      height: 30px;
+      cursor: pointer;
+      border-radius: 4px;
+      color: #fff;
+      background-color: #777777;
+    }
+  }
+  &__info {
+    margin-top: 5px;
+  }
+  &__text {
+    margin-top: 10px;
+  }
+}
