@@ -1,2 +1,19 @@
-<h1>Admin</h1>
+<div class="admin-top-bar">
+  <nav class="admin-top-bar__nav">
+    <ul>
+      <li>
+        <button routerLink="/">Back to home page</button>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'dashboard']">dashboard</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'create']">create</a>
+      </li>
+    </ul>
+  </nav>
+  <div>
+    <a href="#" (click)="logout($event)">log out</a>
+  </div>
+</div>
 <router-outlet></router-outlet>
