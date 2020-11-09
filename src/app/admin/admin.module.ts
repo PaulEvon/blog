@@ -13,13 +13,14 @@ import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import {AuthService} from "./shared/services/auth.service";
 import {SharedModule} from "../shared/shared.module";
+import {AuthGuard} from "./shared/services/auth.guard";
 const routes: Routes = [
   { path: '', component: AdminLayoutComponent, children: [
       {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
       {path: 'login', component: LoginPageComponent},
-      {path: 'dashboard', component: DashboardPageComponent},
-      {path: 'post/:id/edit', component: EditPageComponent},
-      {path: 'create', component: CreatePageComponent},
+      {path: 'dashboard', component: DashboardPageComponent, canActivate: [AuthGuard]},
+      {path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard]},
+      {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard]},
 
     ]
   }
@@ -37,7 +38,7 @@ const routes: Routes = [
     SharedModule
   ],
   exports: [RouterModule],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
 })
 export class AdminModule {
 

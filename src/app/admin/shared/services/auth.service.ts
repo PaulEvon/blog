@@ -1,13 +1,14 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {FirebaseAuthResponse, User} from "../../../shared/interfaces";
-import {Observable, throwError} from "rxjs";
+import {Observable, Subject, throwError} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {catchError, tap} from "rxjs/operators";
 
 
 @Injectable()
 export class AuthService {
+  error$: Subject<any> = new Subject<any>()
   constructor(private http: HttpClient) { }
   get token(): string {
     const expDate = localStorage.getItem('fb-token-exp')
@@ -21,7 +22,15 @@ export class AuthService {
     console.log(error)
     const {message} = error.error.error
     if (message) {
-
+      console.log(message)
+      switch (message) {
+        case "EMAIL_NOT_FOUND":
+          this.error$.next('no such email')
+          break
+        case "INVALID_PASSWORD":
+          this.error$.next('wrong password')
+          break
+      }
       return throwError(error)
     }
   }

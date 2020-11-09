@@ -1,5 +1,8 @@
 <form class="admin-login__form" [formGroup]="form" (ngSubmit)="submit()">
   <h2>Enter to admin panel</h2>
+  <div *ngIf="auth.error$ | async as error">
+    {{ error }}
+  </div>
   <mat-form-field appearance="outline">
     <mat-label>email</mat-label>
     <input matInput type="email" [errorStateMatcher]="matcher" formControlName="email">

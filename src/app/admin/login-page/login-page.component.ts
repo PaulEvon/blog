@@ -3,7 +3,7 @@ import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@a
 import {User} from "../../shared/interfaces";
 import {ErrorStateMatcher} from "@angular/material/core";
 import {AuthService} from "../shared/services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -25,9 +25,16 @@ export class LoginPageComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   constructor(
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      console.log(params)
+      if (params.key === 'loginAgain') {
+
+      }
+    })
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
@@ -52,6 +59,8 @@ export class LoginPageComponent implements OnInit {
     this.auth.login(user).subscribe(() => {
       this.form.reset()
       this.router.navigate(['/admin', 'dashboard'])
+      this.waitingResponse = false
+    }, () => {
       this.waitingResponse = false
     })
   }
