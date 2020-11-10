@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class LoginPageComponent implements OnInit {
-  waitingResponse
+  waitingResponse = false
   form: FormGroup
   matcher = new MyErrorStateMatcher();
   constructor(
@@ -30,11 +30,11 @@ export class LoginPageComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
-      console.log(params)
-      if (params.key === 'loginAgain') {
-
+      if (params['authFailed']) {
+        console.log('authentication failed')
       }
     })
+
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,

@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {RouterModule, Routes} from "@angular/router";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
@@ -11,9 +11,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
-import {AuthService} from "./shared/services/auth.service";
 import {SharedModule} from "../shared/shared.module";
 import {AuthGuard} from "./shared/services/auth.guard";
+import {SearchPipe} from "./shared/search.pipe";
 const routes: Routes = [
   { path: '', component: AdminLayoutComponent, children: [
       {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
@@ -27,7 +27,14 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [AdminLayoutComponent, LoginPageComponent, DashboardPageComponent, CreatePageComponent, EditPageComponent],
+  declarations: [
+    AdminLayoutComponent,
+    LoginPageComponent,
+    DashboardPageComponent,
+    CreatePageComponent,
+    EditPageComponent,
+    SearchPipe
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -35,10 +42,11 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   exports: [RouterModule],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthGuard],
 })
 export class AdminModule {
 
