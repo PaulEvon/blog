@@ -1,0 +1,17 @@
+.alert {
+  &-seccess {
+    background-color: lawngreen;
+  }
+  &-danger {
+    background-color: red;
+  }
+  &-warning {
+    background-color: darkorange;
+  }
+}
+.alert-wrap {
+  position: fixed;
+  top: 50px;
+  right: 40px;
+  max-width: 200px;
+}
