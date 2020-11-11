@@ -1,1 +1,17 @@
-<p>create-page works!</p>
+<Form [formGroup]="form" class="create-post-form" (ngSubmit)="submit()">
+  <h1>Create new Post</h1>
+  <mat-form-field appearance="outline">
+    <mat-label >Post title</mat-label>
+    <input matInput type="text" id="title" formControlName="title">
+    <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="form.controls.title.hasError('required')">
+      Please write title
+    </mat-error>
+  </mat-form-field>
+  <quill-editor formControlName="text"></quill-editor>
+  <mat-form-field appearance="outline">
+    <mat-label>Author</mat-label>
+    <input matInput type="text" formControlName="author">
+  </mat-form-field>
+  <button mat-raised-button color="accent" [disabled]="form.invalid" >Create post</button>
+</Form>

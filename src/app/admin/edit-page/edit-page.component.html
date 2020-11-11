@@ -1,1 +1,14 @@
-<p>edit-page works!</p>
+<div *ngIf="post; else loading">
+  <Form [formGroup]="form" class="edit-post-form" (ngSubmit)="submit()">
+    <h1>Post redactor</h1>
+    <mat-form-field appearance="outline">
+      <mat-label >Post title</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+    <quill-editor formControlName="text"></quill-editor>
+    <button mat-raised-button color="primary" [disabled]="form.invalid || waitingResponse" type="submit">Apply changes</button>
+  </Form>
+</div>
+<ng-template #loading>
+  <p>loading....</p>
+</ng-template>
