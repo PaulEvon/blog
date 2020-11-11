@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
-import {ErrorStateMatcher} from "@angular/material/core";
 import {User} from "../../shared/interfaces";
+import {ErrorStateMatcher} from "@angular/material/core";
+import {AuthService} from "../shared/services/auth.service";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -17,10 +20,21 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class LoginPageComponent implements OnInit {
+  waitingResponse = false
   form: FormGroup
   matcher = new MyErrorStateMatcher();
-  constructor() { }
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['authFailed']) {
+        console.log('authentication failed')
+      }
+    })
+
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
@@ -33,10 +47,21 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid) { return };
+    if (this.form.invalid) {
+      return
+    }
+    this.waitingResponse = true
     const user: User = {
       email: this.form.value.email,
-      password: this.form.value.password
+      password: this.form.value.password,
+      returnSecureToken: true
     }
+    this.auth.login(user).subscribe(() => {
+      this.form.reset()
+      this.router.navigate(['/admin', 'dashboard'])
+      this.waitingResponse = false
+    }, () => {
+      this.waitingResponse = false
+    })
   }
 }

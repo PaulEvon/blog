@@ -1,6 +1,6 @@
-<div class="admin-top-bar">
-  <nav class="admin-top-bar__nav">
-    <ul>
+<div class="admin-top-bar" >
+  <nav class="admin-top-bar__nav" *ngIf="auth.isAuthenticated()">
+    <ul >
       <li>
         <button routerLink="/">Back to home page</button>
       </li>
@@ -11,9 +11,10 @@
         <a [routerLink]="['/admin', 'create']">create</a>
       </li>
     </ul>
+    <div>
+      <a href="#" (click)="logout($event)">log out</a>
+    </div>
   </nav>
-  <div>
-    <a href="#" (click)="logout($event)">log out</a>
-  </div>
+  <app-alert></app-alert>
 </div>
 <router-outlet></router-outlet>
